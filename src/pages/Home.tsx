@@ -16,6 +16,7 @@ const Container = styled(PageContainer)`
 
 const Content = styled.div`
   margin: 0 auto;
+  min-height: 100%;
 
   display: flex;
   flex-direction: column;
