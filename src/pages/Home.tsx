@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import oc from "../oc.json";
 
 import PageContainer from "../components/PageContainer";
@@ -10,28 +10,30 @@ const Container = styled(PageContainer)`
 `;
 
 const Box = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   margin-top: auto;
   height: 80%;
   border-radius: 5rem 5rem 0 0;
   box-shadow: 0px -15px 15px -10px rgba(0, 0, 0, 0.23);
 
   background-color: white;
-
   padding: 2rem 0 0 0;
   box-sizing: border-box;
+
+  overflow: auto;
 `;
 
 const Content = styled.div`
+  margin: 0 auto;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  width: 80%;
+  overflow: visible;
+
+  width: 75%;
+  padding-bottom: 2rem;
 `;
 
 const BoxTitle = styled.small`
@@ -51,6 +53,7 @@ const BoxParticipateButton = styled.button`
   border: none;
   color: white;
   background-color: ${oc.indigo[8]};
+  min-height: 2.3rem;
 
   font-size: 1.1rem;
   padding: 0.5rem;
@@ -65,7 +68,7 @@ const BoxParagraph = styled.p`
   color: ${oc.gray[6]};
 `;
 
-const CardContainer = styled.div`
+const HomeCard = styled(Card)`
   margin-top: 1.5rem;
 `;
 
@@ -81,19 +84,21 @@ export default function Home() {
           <BoxTitle>이번 주 도전 과제</BoxTitle>
           <BoxMissionTitle>{missionTitle}</BoxMissionTitle>
           <BoxParticipateButton>저도 참여할래요!</BoxParticipateButton>
-          <BoxParagraph>
-            구성 : {ingredients}
-          </BoxParagraph>
+          <BoxParagraph>구성 : {ingredients}</BoxParagraph>
 
-          <CardContainer>
-            <Card>
-              <CardTitle>TIP!</CardTitle>
-              <BoxParagraph>
-                핫플레이트는 인덕션, 전자레인지, 가스레인지로, 비커는 안 쓰는
-                스테인리스 그릇으로 대체 가능합니다!
-              </BoxParagraph>
-            </Card>
-          </CardContainer>
+          <HomeCard>
+            <CardTitle>TIP!</CardTitle>
+            <BoxParagraph>
+              핫플레이트는 인덕션, 전자레인지, 가스레인지로, 비커는 안 쓰는
+              스테인리스 그릇으로 대체 가능합니다!
+            </BoxParagraph>
+          </HomeCard>
+          <HomeCard>
+            <CardTitle>관련 키트</CardTitle>
+            <BoxParagraph>
+              향초 만들기 키트, 방향제 만들기 키트, 입욕제 만들기 키트
+            </BoxParagraph>
+          </HomeCard>
         </Content>
       </Box>
     </Container>
