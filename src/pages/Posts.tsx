@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 import oc from "../oc.json";
-import Swal from "sweetalert2";
+import Swal, { SweetAlertOptions, SweetAlertResult } from "sweetalert2";
 
 import PageContainer from "../components/PageContainer";
 
@@ -29,16 +29,29 @@ const WriteButton = styled.button`
 `;
 
 export default function Posts() {
-  const onWriteClick = () => {
-    Swal.fire({
+  const onWriteClick = async () => {
+    const firstModal: SweetAlertOptions<any, any> = {
       title: "후기 내용",
-      text:
-        "여러분의 도전 과제 후기를 써주세요!",
+      text: "여러분의 도전 과제 후기를 써주세요!",
       input: "textarea",
       inputAttributes: {
-        style: "resize: vertical; font-size: 1rem"
+        style: "resize: vertical; font-size: 1rem",
       },
-    });
+    };
+
+    const secondModal: SweetAlertOptions<any, any> = {
+      title: "이미지 업로드",
+      text: "도전 과제 수행 이미지를 올려주세요!",
+      input: "file",
+      inputAttributes: {
+        accept: "image/*",
+      },
+    };
+
+    const result: SweetAlertResult | undefined = await Swal.mixin({ progressSteps: ["1", "2"] }).queue([firstModal, secondModal]);
+    if (result) {
+      console.log(result.value);
+    }
   };
 
   return (
