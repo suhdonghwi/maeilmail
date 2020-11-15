@@ -32,12 +32,8 @@ const WriteButton = styled.button`
   }
 `;
 
-const PostList = styled.ul`
-  padding: 0;
-  list-style-type: none;
-`;
-
-const PostItem = styled.li``;
+const PostList = styled.ul``;
+const PostItem = styled.ul``;
 
 interface PostsProps {
   user: firebase.User;
@@ -48,11 +44,11 @@ export default function Posts({ user }: PostsProps) {
 
   useEffect(() => {
     async function fetch() {
-      const result = (
+      const result: Post[] = (
         await firebase.database().ref("posts").once("value")
       ).val();
 
-      setPosts(Object.values(result));
+      setPosts(result);
     }
 
     fetch();
@@ -103,11 +99,8 @@ export default function Posts({ user }: PostsProps) {
           <ReactLoading type="cubes" color={oc.indigo[5]} />
         ) : (
           <PostList>
-            {posts.map((post) => (
-              <PostItem>
-                {post.author} : {post.content}
-              </PostItem>
-            ))}
+            <PostItem>
+            </PostItem>
           </PostList>
         )}
       </Content>
