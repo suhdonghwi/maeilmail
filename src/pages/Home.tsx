@@ -72,6 +72,7 @@ const BoxParagraph = styled.p`
 
 const HomeCard = styled(Card)`
   margin-top: 1.5rem;
+  width: 100%;
 `;
 
 interface HomeProps {

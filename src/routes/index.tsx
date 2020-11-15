@@ -15,6 +15,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import Loading from "../pages/Loading";
+import Posts from "../pages/Posts";
 import Calendar from "../pages/Calendar";
 
 const HideIfLogin = ({ children }: any) => {
@@ -61,6 +62,7 @@ export default function Root() {
         <PrivateRoute path="/" exact component={Home} user={user} />
         <PrivateRoute path="/profile" exact component={Profile} user={user} />
         <PrivateRoute path="/calendar" exact component={Calendar} user={user} />
+        <PrivateRoute path="/posts" exact component={Posts} user={user} />
         <Route path="/login" exact component={Login} />
         <Redirect path="*" to="/login" />
       </Switch>

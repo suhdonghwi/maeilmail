@@ -59,7 +59,7 @@ export default function NavBar() {
     { link: "/order", Icon: FiShoppingCart },
     { link: "/calendar", Icon: FiCalendar },
     { link: "/", Icon: FiHome },
-    { link: "/post", Icon: FiEdit3 },
+    { link: "/posts", Icon: FiEdit3 },
     { link: "/profile", Icon: FiMenu },
   ];
 

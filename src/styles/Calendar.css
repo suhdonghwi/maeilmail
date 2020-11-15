@@ -55,7 +55,13 @@ button:active {
   font-size: 1rem;
 
   width: 0;
-  height: 3rem;
+  height: 2.8rem;
+}
+
+.react-calendar__tile.highlight {
+  background-color: #91a7ff;
+  color: white;
+  font-weight: bold;
 }
 
 .react-calendar__navigation__label__labelText {
