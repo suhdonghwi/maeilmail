@@ -1,13 +1,20 @@
 import React from "react";
-import "./App.css";
+import styled from "styled-components";
 
 import Root from "./routes";
 
+const RootContainer = styled.div`
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+`;
+
 function App() {
   return (
-    <div className="App">
+    <RootContainer>
       <Root />
-    </div>
+    </RootContainer>
   );
 }
 

@@ -14,6 +14,8 @@ import oc from "../oc.json";
 
 const Nav = styled.nav`
   width: 100%;
+  padding: 0.7rem 1.5rem;
+  box-sizing: border-box;
 `;
 
 const TabList = styled.ul`
@@ -32,6 +34,14 @@ const TabList = styled.ul`
 
 const TabItem = styled.li`
   margin: 0 auto;
+
+  &:first-child {
+    margin: 0 auto 0 0;
+  }
+
+  &:last-child {
+    margin: 0 0 0 auto;
+  }
 `;
 
 const TabLink = styled(Link)`
