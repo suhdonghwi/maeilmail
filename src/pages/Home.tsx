@@ -48,7 +48,7 @@ const BoxMissionTitle = styled.h1`
 `;
 
 const BoxParticipateButton = styled.button`
-  margin: 1.5rem 0;
+  margin: 1.7rem 0;
 
   border: none;
   color: white;
@@ -76,6 +76,9 @@ export default function Home() {
   const missionTitle = "공룡비누 만들기";
   const ingredients =
     "화이트 비누베이스 (500g), 비타민 E/히아루론산 1% 병풀추출물, 캐모마일 워터, 기포제거제, 컬러글리세린 5종, 비누 거품망, 공룡12구몰드, 기본몰드";
+  const tip =
+    "핫플레이트는 인덕션, 전자레인지, 가스레인지로, 비커는 안 쓰는 스테인리스 그릇으로 대체 가능합니다!";
+  const kits = "향초 만들기 키트, 방향제 만들기 키트, 입욕제 만들기 키트";
 
   return (
     <Container>
@@ -88,16 +91,11 @@ export default function Home() {
 
           <HomeCard>
             <CardTitle>TIP!</CardTitle>
-            <BoxParagraph>
-              핫플레이트는 인덕션, 전자레인지, 가스레인지로, 비커는 안 쓰는
-              스테인리스 그릇으로 대체 가능합니다!
-            </BoxParagraph>
+            <BoxParagraph>{tip}</BoxParagraph>
           </HomeCard>
           <HomeCard>
             <CardTitle>관련 키트</CardTitle>
-            <BoxParagraph>
-              향초 만들기 키트, 방향제 만들기 키트, 입욕제 만들기 키트
-            </BoxParagraph>
+            <BoxParagraph>{kits}</BoxParagraph>
           </HomeCard>
         </Content>
       </Box>
