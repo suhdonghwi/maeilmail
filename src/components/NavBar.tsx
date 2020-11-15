@@ -68,7 +68,7 @@ export default function NavBar() {
     <Nav>
       <TabList>
         {data.map(({ link, Icon }) => (
-          <TabItem>
+          <TabItem key={link}>
             <TabLink
               to={link}
               className={history.location.pathname === link ? "current" : ""}
