@@ -3,6 +3,7 @@ import styled from "styled-components";
 import oc from "../oc.json";
 
 import PageContainer from "../components/PageContainer";
+import Card, { CardTitle } from "../components/Card";
 
 const Container = styled(PageContainer)`
   background-color: ${oc.indigo[7]};
@@ -20,8 +21,17 @@ const Box = styled.section`
 
   background-color: white;
 
-  padding: 2rem 0;
+  padding: 2rem 0 0 0;
   box-sizing: border-box;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 80%;
 `;
 
 const BoxTitle = styled.small`
@@ -36,7 +46,7 @@ const BoxMissionTitle = styled.h1`
 `;
 
 const BoxParticipateButton = styled.button`
-  margin-top: 1.5rem;
+  margin: 1.5rem 0;
 
   border: none;
   color: white;
@@ -46,15 +56,17 @@ const BoxParticipateButton = styled.button`
   padding: 0.5rem;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
-  width: 70%;
+  width: 15rem;
   cursor: pointer;
 `;
 
-const BoxIngredients = styled.p`
-  margin-top: 1.5rem;
-  width: 80%;
-
+const BoxParagraph = styled.p`
+  margin: 0;
   color: ${oc.gray[6]};
+`;
+
+const CardContainer = styled.div`
+  margin-top: 1.5rem;
 `;
 
 export default function Home() {
@@ -65,10 +77,24 @@ export default function Home() {
   return (
     <Container>
       <Box>
-        <BoxTitle>이번 주 도전 과제</BoxTitle>
-        <BoxMissionTitle>{missionTitle}</BoxMissionTitle>
-        <BoxParticipateButton>저도 참여할래요!</BoxParticipateButton>
-        <BoxIngredients>구성 : {ingredients}</BoxIngredients>
+        <Content>
+          <BoxTitle>이번 주 도전 과제</BoxTitle>
+          <BoxMissionTitle>{missionTitle}</BoxMissionTitle>
+          <BoxParticipateButton>저도 참여할래요!</BoxParticipateButton>
+          <BoxParagraph>
+            구성 : {ingredients}
+          </BoxParagraph>
+
+          <CardContainer>
+            <Card>
+              <CardTitle>TIP!</CardTitle>
+              <BoxParagraph>
+                핫플레이트는 인덕션, 전자레인지, 가스레인지로, 비커는 안 쓰는
+                스테인리스 그릇으로 대체 가능합니다!
+              </BoxParagraph>
+            </Card>
+          </CardContainer>
+        </Content>
       </Box>
     </Container>
   );
