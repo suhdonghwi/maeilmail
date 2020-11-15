@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
+import firebase from "firebase";
 import oc from "../oc.json";
 
 import PageContainer from "../components/PageContainer";
 import Card, { CardTitle } from "../components/Card";
 import RoundBox from "../components/RoundBox";
+import Mission from "../interfaces/Mission";
+
+import ReactLoading from "react-loading";
 
 const Container = styled(PageContainer)`
   background-color: ${oc.indigo[7]};
@@ -61,30 +65,40 @@ const HomeCard = styled(Card)`
 `;
 
 export default function Home() {
-  const missionTitle = "공룡비누 만들기";
-  const ingredients =
-    "화이트 비누베이스 (500g), 비타민 E/히아루론산 1% 병풀추출물, 캐모마일 워터, 기포제거제, 컬러글리세린 5종, 비누 거품망, 공룡12구몰드, 기본몰드";
-  const tip =
-    "핫플레이트는 인덕션, 전자레인지, 가스레인지로, 비커는 안 쓰는 스테인리스 그릇으로 대체 가능합니다!";
-  const kits = "향초 만들기 키트, 방향제 만들기 키트, 입욕제 만들기 키트";
+  const [mission, setMission] = useState<Mission | null>(null);
+
+  useEffect(() => {
+    async function fetch() {
+      const result = await firebase.database().ref("mission").once("value");
+      setMission(result.val());
+    }
+
+    fetch();
+  }, []);
 
   return (
     <Container>
       <RoundBox>
         <Content>
-          <BoxTitle>이번 주 도전 과제</BoxTitle>
-          <BoxMissionTitle>{missionTitle}</BoxMissionTitle>
-          <BoxParticipateButton>저도 참여할래요!</BoxParticipateButton>
-          <BoxParagraph>구성 : {ingredients}</BoxParagraph>
+          {mission === null ? (
+            <ReactLoading type="cubes" color={oc.indigo[7]} />
+          ) : (
+            <>
+              <BoxTitle>이번 주 도전 과제</BoxTitle>
+              <BoxMissionTitle>{mission.title}</BoxMissionTitle>
+              <BoxParticipateButton>저도 참여할래요!</BoxParticipateButton>
+              <BoxParagraph>구성 : {mission.ingredients}</BoxParagraph>
 
-          <HomeCard>
-            <CardTitle>TIP!</CardTitle>
-            <BoxParagraph>{tip}</BoxParagraph>
-          </HomeCard>
-          <HomeCard>
-            <CardTitle>관련 키트</CardTitle>
-            <BoxParagraph>{kits}</BoxParagraph>
-          </HomeCard>
+              <HomeCard>
+                <CardTitle>TIP!</CardTitle>
+                <BoxParagraph>{mission.tip}</BoxParagraph>
+              </HomeCard>
+              <HomeCard>
+                <CardTitle>관련 키트</CardTitle>
+                <BoxParagraph>{mission.kit}</BoxParagraph>
+              </HomeCard>
+            </>
+          )}
         </Content>
       </RoundBox>
     </Container>
