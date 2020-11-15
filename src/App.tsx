@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
 
-import NavBar from "./components/NavBar";
+import Root from "./routes";
 
 function App() {
   return (
     <div className="App">
-      <NavBar />
+      <Root />
     </div>
   );
 }
