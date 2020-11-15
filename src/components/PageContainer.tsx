@@ -1,5 +1,5 @@
 import React, { ReactChild, ReactChildren } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const Main = styled.main`
   flex: 1;
@@ -10,8 +10,12 @@ const Main = styled.main`
 
 interface PageContainerProps {
   children: ReactChild | ReactChildren;
+  className?: string;
 }
 
-export default function PageContainer({ children }: PageContainerProps) {
-  return <Main>{children}</Main>;
+export default function PageContainer({
+  children,
+  className,
+}: PageContainerProps) {
+  return <Main className={className}>{children}</Main>;
 }
