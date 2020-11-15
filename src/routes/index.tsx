@@ -14,6 +14,7 @@ import NavBar from "../components/NavBar";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
+import Loading from "../pages/Loading";
 
 const HideIfLogin = ({ children }: any) => {
   const location = useLocation();
@@ -24,16 +25,18 @@ const HideIfLogin = ({ children }: any) => {
   return children;
 };
 
-const PrivateRoute = ({
-  component: Component,
-  authenticated,
-  ...rest
-}: any) => {
+const PrivateRoute = ({ component: Component, user, ...rest }: any) => {
+  console.log(user);
+
   return (
     <Route
       {...rest}
       render={(props) =>
-        authenticated ? <Component {...props} /> : <Redirect to="/login" />
+        user !== null ? (
+          <Component {...props} user={user} />
+        ) : (
+          <Redirect to="/login" />
+        )
       }
     />
   );
@@ -42,35 +45,22 @@ const PrivateRoute = ({
 export default function Root() {
   const history = useHistory();
   const [user, setUser] = useState<firebase.User | null>(null);
-  const authenticated = user !== null;
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
-
-      if (user) {
-        history.push("/");
-      } else {
-        history.push("/login");
-      }
+      setLoading(false);
     });
   }, [history]);
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <BrowserRouter>
       <Switch>
-        <PrivateRoute
-          path="/"
-          exact
-          component={Home}
-          authenticated={authenticated}
-        />
-        <PrivateRoute
-          path="/profile"
-          exact
-          component={Profile}
-          authenticated={authenticated}
-        />
+        <PrivateRoute path="/" exact component={Home} user={user} />
+        <PrivateRoute path="/profile" exact component={Profile} user={user} />
         <Route path="/login" exact component={Login} />
         <Redirect path="*" to="/login" />
       </Switch>

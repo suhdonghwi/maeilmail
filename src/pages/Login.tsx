@@ -13,7 +13,7 @@ const Container = styled.main`
   align-items: center;
   justify-content: center;
 
-  background-color: ${oc.indigo[5]};
+  background-color: ${oc.indigo[7]};
 `;
 
 const LogoImage = styled.img`

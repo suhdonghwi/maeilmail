@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import firebase from "firebase";
 
 import oc from "../oc.json";
 
@@ -25,10 +26,16 @@ const Box = styled.section`
 const ProfileImage = styled.img`
 `;
 
-export default function Profile() {
+interface ProfileProps {
+  user: firebase.User;
+}
+
+export default function Profile({user}: ProfileProps) {
   return (
     <Container>
-      <Box></Box>
+      <Box>
+        {user.email}
+      </Box>
     </Container>
   );
 }
