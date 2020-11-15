@@ -26,8 +26,6 @@ const HideIfLogin = ({ children }: any) => {
 };
 
 const PrivateRoute = ({ component: Component, user, ...rest }: any) => {
-  console.log(user);
-
   return (
     <Route
       {...rest}

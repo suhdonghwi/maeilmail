@@ -3,5 +3,5 @@ export default interface Mission {
   ingredients: string;
   kit: string;
   tip: string;
-  participant: number;
+  participants: Record<string, string>;
 }

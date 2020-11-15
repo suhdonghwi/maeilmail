@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components/macro";
 import firebase from "firebase";
 import oc from "../oc.json";
@@ -54,6 +54,13 @@ const BoxParticipateButton = styled.button`
 
   width: 15rem;
   cursor: pointer;
+
+  transition: all 0.5s;
+
+  &.participated {
+    box-shadow: none;
+    background-color: ${oc.gray[5]};
+  }
 `;
 
 const BoxParagraph = styled.p`
@@ -65,17 +72,35 @@ const HomeCard = styled(Card)`
   margin-top: 1.5rem;
 `;
 
-export default function Home() {
+interface HomeProps {
+  user: firebase.User;
+}
+
+export default function Home({ user }: HomeProps) {
   const [mission, setMission] = useState<Mission | null>(null);
+  const [participate, setParticipate] = useState(false);
 
   useEffect(() => {
     async function fetch() {
-      const result = await firebase.database().ref("mission").once("value");
-      setMission(result.val());
+      const result: Mission = (
+        await firebase.database().ref("mission").once("value")
+      ).val();
+      setMission(result);
+
+      if (Object.values(result.participants).includes(user.uid)) {
+        setParticipate(true);
+      }
     }
 
     fetch();
-  }, []);
+  }, [user]);
+
+  const onParticipate = useCallback(() => {
+    if (!participate) {
+      firebase.database().ref("mission/participants").push(user.uid);
+      setParticipate(true);
+    }
+  }, [user, participate]);
 
   return (
     <Container>
@@ -87,7 +112,12 @@ export default function Home() {
             <>
               <BoxTitle>이번 주 도전 과제</BoxTitle>
               <BoxMissionTitle>{mission.title}</BoxMissionTitle>
-              <BoxParticipateButton>저도 참여할래요!</BoxParticipateButton>
+              <BoxParticipateButton
+                onClick={onParticipate}
+                className={participate ? "participated" : ""}
+              >
+                {participate ? "참여하는 미션입니다." : "저도 참여할래요!"}
+              </BoxParticipateButton>
               <BoxParagraph>구성 : {mission.ingredients}</BoxParagraph>
 
               <HomeCard>
