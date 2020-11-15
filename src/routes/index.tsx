@@ -1,17 +1,37 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  Redirect,
+  useLocation,
+} from "react-router-dom";
+
+import NavBar from "../components/NavBar";
 
 import Home from "../pages/Home";
-import NavBar from "../components/NavBar";
+import Login from "../pages/Login";
+
+const HideIfLogin = ({ children }: any) => {
+  const location = useLocation();
+  if (location.pathname === "/login") {
+    return null;
+  }
+
+  return children;
+};
 
 export default function Root() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Redirect path="*" to="/" />
+        <Route path="/login" exact component={Login} />
+        <Redirect path="*" to="/login" />
       </Switch>
-      <NavBar />
+      <HideIfLogin>
+        <NavBar />
+      </HideIfLogin>
     </BrowserRouter>
   );
 }
