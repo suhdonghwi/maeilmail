@@ -1,9 +1,14 @@
 import React from "react";
 import "./App.css";
-import * as oc from "./oc.json";
+
+import NavBar from "./components/NavBar";
 
 function App() {
-  return <div className="App">Hello, world! {oc.red[0]}</div>;
+  return (
+    <div className="App">
+      <NavBar />
+    </div>
+  );
 }
 
 export default App;
