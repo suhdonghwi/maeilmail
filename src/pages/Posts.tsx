@@ -71,15 +71,16 @@ interface PostsProps {
 export default function Posts({ user }: PostsProps) {
   const [posts, setPosts] = useState<Post[] | null>(null);
 
+  async function fetch() {
+    const result = (
+      await firebase.database().ref("posts").once("value")
+    ).val();
+
+    if (result === null) setPosts([]);
+    else setPosts(Object.values(result));
+  }
+
   useEffect(() => {
-    async function fetch() {
-      const result = (
-        await firebase.database().ref("posts").once("value")
-      ).val();
-
-      setPosts(Object.values(result));
-    }
-
     fetch();
   }, []);
 
@@ -114,6 +115,9 @@ export default function Posts({ user }: PostsProps) {
           imageUrl: e.target?.result as string,
         };
         firebase.database().ref("posts").push(post);
+
+        setPosts(null);
+        fetch();
       };
 
       reader.readAsDataURL(result.value[1]);
