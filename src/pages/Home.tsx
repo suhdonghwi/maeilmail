@@ -4,22 +4,10 @@ import oc from "../oc.json";
 
 import PageContainer from "../components/PageContainer";
 import Card, { CardTitle } from "../components/Card";
+import RoundBox from "../components/RoundBox";
 
 const Container = styled(PageContainer)`
   background-color: ${oc.indigo[7]};
-`;
-
-const Box = styled.section`
-  margin-top: auto;
-  height: 80%;
-  border-radius: 5rem 5rem 0 0;
-  box-shadow: 0px -15px 15px -10px rgba(0, 0, 0, 0.23);
-
-  background-color: white;
-  padding: 2rem 0 0 0;
-  box-sizing: border-box;
-
-  overflow: auto;
 `;
 
 const Content = styled.div`
@@ -82,7 +70,7 @@ export default function Home() {
 
   return (
     <Container>
-      <Box>
+      <RoundBox>
         <Content>
           <BoxTitle>이번 주 도전 과제</BoxTitle>
           <BoxMissionTitle>{missionTitle}</BoxMissionTitle>
@@ -98,7 +86,7 @@ export default function Home() {
             <BoxParagraph>{kits}</BoxParagraph>
           </HomeCard>
         </Content>
-      </Box>
+      </RoundBox>
     </Container>
   );
 }

@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
+import { Link, useLocation } from "react-router-dom";
 
 import {
   FiHome,
@@ -54,14 +53,14 @@ const TabLink = styled(Link)`
 `;
 
 export default function NavBar() {
-  const history = useHistory();
+  const location = useLocation();
 
   const data = [
     { link: "/order", Icon: FiShoppingCart },
     { link: "/calendar", Icon: FiCalendar },
     { link: "/", Icon: FiHome },
     { link: "/post", Icon: FiEdit3 },
-    { link: "/menu", Icon: FiMenu },
+    { link: "/profile", Icon: FiMenu },
   ];
 
   return (
@@ -71,7 +70,7 @@ export default function NavBar() {
           <TabItem key={link}>
             <TabLink
               to={link}
-              className={history.location.pathname === link ? "current" : ""}
+              className={location.pathname === link ? "current" : ""}
             >
               <Icon />
             </TabLink>
