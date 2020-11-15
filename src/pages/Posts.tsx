@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 import oc from "../oc.json";
+import Swal from "sweetalert2";
 
 import PageContainer from "../components/PageContainer";
 
@@ -28,10 +29,22 @@ const WriteButton = styled.button`
 `;
 
 export default function Posts() {
+  const onWriteClick = () => {
+    Swal.fire({
+      title: "후기 내용",
+      text:
+        "여러분의 도전 과제 후기를 써주세요!",
+      input: "textarea",
+      inputAttributes: {
+        style: "resize: vertical; font-size: 1rem"
+      },
+    });
+  };
+
   return (
     <PageContainer>
       <Content>
-        <WriteButton>글 쓰기</WriteButton>
+        <WriteButton onClick={onWriteClick}>글 쓰기</WriteButton>
       </Content>
     </PageContainer>
   );
