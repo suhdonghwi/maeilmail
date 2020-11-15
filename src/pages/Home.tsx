@@ -44,14 +44,23 @@ const BoxParticipateButton = styled.button`
 
   font-size: 1.1rem;
   padding: 0.5rem;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
   width: 70%;
   cursor: pointer;
 `;
 
+const BoxIngredients = styled.p`
+  margin-top: 1.5rem;
+  width: 80%;
+
+  color: ${oc.gray[6]};
+`;
+
 export default function Home() {
   const missionTitle = "공룡비누 만들기";
+  const ingredients =
+    "화이트 비누베이스 (500g), 비타민 E/히아루론산 1% 병풀추출물, 캐모마일 워터, 기포제거제, 컬러글리세린 5종, 비누 거품망, 공룡12구몰드, 기본몰드";
 
   return (
     <Container>
@@ -59,6 +68,7 @@ export default function Home() {
         <BoxTitle>이번 주 도전 과제</BoxTitle>
         <BoxMissionTitle>{missionTitle}</BoxMissionTitle>
         <BoxParticipateButton>저도 참여할래요!</BoxParticipateButton>
+        <BoxIngredients>구성 : {ingredients}</BoxIngredients>
       </Box>
     </Container>
   );
