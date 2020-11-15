@@ -3,6 +3,8 @@ import styled from "styled-components/macro";
 import firebase from "firebase";
 import oc from "../oc.json";
 
+import dayjs from "dayjs";
+
 import PageContainer from "../components/PageContainer";
 import Card, { CardTitle } from "../components/Card";
 import RoundBox from "../components/RoundBox";
@@ -98,6 +100,10 @@ export default function Home({ user }: HomeProps) {
   const onParticipate = useCallback(() => {
     if (!participate) {
       firebase.database().ref("mission/participants").push(user.uid);
+      firebase
+        .database()
+        .ref("users/" + user.uid)
+        .push(dayjs().format("YYYY-MM-DD"));
       setParticipate(true);
     }
   }, [user, participate]);
