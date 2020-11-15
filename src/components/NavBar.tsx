@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
 import {
   FiHome,
@@ -46,15 +47,21 @@ const TabItem = styled.li`
 
 const TabLink = styled(Link)`
   color: ${oc.indigo[2]};
+
+  &.current {
+    color: ${oc.indigo[7]};
+  }
 `;
 
 export default function NavBar() {
+  const history = useHistory();
+
   const data = [
-    { link: "order", Icon: FiShoppingCart },
-    { link: "calendar", Icon: FiCalendar },
+    { link: "/order", Icon: FiShoppingCart },
+    { link: "/calendar", Icon: FiCalendar },
     { link: "/", Icon: FiHome },
-    { link: "post", Icon: FiEdit3 },
-    { link: "menu", Icon: FiMenu },
+    { link: "/post", Icon: FiEdit3 },
+    { link: "/menu", Icon: FiMenu },
   ];
 
   return (
@@ -62,7 +69,10 @@ export default function NavBar() {
       <TabList>
         {data.map(({ link, Icon }) => (
           <TabItem>
-            <TabLink to={link}>
+            <TabLink
+              to={link}
+              className={history.location.pathname === link ? "current" : ""}
+            >
               <Icon />
             </TabLink>
           </TabItem>
