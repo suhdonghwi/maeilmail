@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components/macro";
 
 import oc from "../oc.json";
@@ -28,6 +29,16 @@ const LogoText = styled.p`
 `;
 
 export default function Login() {
+  const history = useHistory();
+
+  useEffect(() => {
+    return firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        history.push("/");
+      }
+    });
+  }, [history]);
+
   const uiConfig = {
     signInFlow: "popup",
     signInSuccessUrl: "/",
