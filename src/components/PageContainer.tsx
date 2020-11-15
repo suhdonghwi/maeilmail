@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 const Main = styled.main`
   flex: 1;
-  padding: 1.4rem;
+
+  display: flex;
+  flex-direction: column;
 `;
 
 interface PageContainerProps {
