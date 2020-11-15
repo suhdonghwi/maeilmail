@@ -6,13 +6,22 @@ import Swal, { SweetAlertOptions, SweetAlertResult } from "sweetalert2";
 import ReactLoading from "react-loading";
 
 import PageContainer from "../components/PageContainer";
+import Card from "../components/Card";
 
 import Post from "../interfaces/Post";
+
+const Container = styled(PageContainer)`
+  overflow: auto;
+`;
 
 const Content = styled.div`
   margin: 0 auto;
   width: 75%;
   padding: 2rem 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const WriteButton = styled.button`
@@ -24,6 +33,9 @@ const WriteButton = styled.button`
   font-size: 1.1rem;
   padding: 0.5rem;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  margin-bottom: 1rem;
+
+  min-height: 2.3rem;
 
   cursor: pointer;
 
@@ -35,9 +47,22 @@ const WriteButton = styled.button`
 const PostList = styled.ul`
   padding: 0;
   list-style-type: none;
+  width: 100%;
 `;
 
 const PostItem = styled.li``;
+
+const PostCard = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+`;
+
+const PostImage = styled.img`
+  width: 100%;
+  border-radius: 0.3rem;
+  margin-bottom: 0.5rem;
+`;
 
 interface PostsProps {
   user: firebase.User;
@@ -96,21 +121,28 @@ export default function Posts({ user }: PostsProps) {
   };
 
   return (
-    <PageContainer>
+    <Container>
       <Content>
         <WriteButton onClick={onWriteClick}>글 쓰기</WriteButton>
         {posts === null ? (
           <ReactLoading type="cubes" color={oc.indigo[5]} />
         ) : (
           <PostList>
-            {posts.map((post) => (
-              <PostItem>
-                {post.author} : {post.content}
+            {posts.map((post, i) => (
+              <PostItem key={i}>
+                <PostCard>
+                  <div>
+                    <PostImage src={post.imageUrl} />
+                  </div>
+                  <div>
+                    <strong>{post.author}</strong> {post.content}
+                  </div>
+                </PostCard>
               </PostItem>
             ))}
           </PostList>
         )}
       </Content>
-    </PageContainer>
+    </Container>
   );
 }
