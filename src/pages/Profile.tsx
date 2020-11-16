@@ -5,6 +5,7 @@ import firebase from "firebase";
 import oc from "../oc.json";
 
 import PageContainer from "../components/PageContainer";
+import Card, { CardTitle } from "../components/Card";
 
 const Container = styled(PageContainer)`
   background-color: ${oc.indigo[7]};
@@ -52,6 +53,17 @@ const ProfileId = styled.small`
   font-size: 1.1rem;
 `;
 
+const CouponCard = styled(Card)`
+  margin-top: 2rem;
+  width: 100%;
+`;
+
+const CouponContent = styled.p`
+  color: ${oc.gray[6]};
+  font-size: 1.2rem;
+  text-align: center;
+`;
+
 interface ProfileProps {
   user: firebase.User;
 }
@@ -64,6 +76,12 @@ export default function Profile({ user }: ProfileProps) {
           <ProfileImage src={user.photoURL || ""} />
           <ProfileName>{user.displayName}</ProfileName>
           <ProfileId>@{user.email?.split("@")[0]}</ProfileId>
+          <CouponCard>
+            <CardTitle>나의 이용권</CardTitle>
+            <CouponContent>
+              일반 사용자 이용권 (기간 제한 없음)
+            </CouponContent>
+          </CouponCard>
         </Content>
       </Box>
     </Container>

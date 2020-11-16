@@ -65,10 +65,15 @@ const PostImage = styled.img`
   margin-bottom: 0.5rem;
 `;
 
-const Date = styled.p`
+const Date = styled.div`
   margin: 0 0 0.2rem 0;
   color: ${oc.gray[6]};
   font-size: 0.8rem;
+`;
+
+const PostContent = styled.p`
+  margin: 0;
+  color: ${oc.gray[8]};
 `;
 
 interface PostsProps {
@@ -150,9 +155,9 @@ export default function Posts({ user }: PostsProps) {
                     <PostImage src={post.imageUrl} />
                   </div>
                   <Date>{dayjs(post.date).format("YYYY년 MM월 DD일")}</Date>
-                  <div>
+                  <PostContent>
                     <strong>{post.author}</strong> {post.content}
-                  </div>
+                  </PostContent>
                 </PostCard>
               </PostItem>
             ))}

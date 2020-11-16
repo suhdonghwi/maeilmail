@@ -17,6 +17,7 @@ import Profile from "../pages/Profile";
 import Loading from "../pages/Loading";
 import Posts from "../pages/Posts";
 import Calendar from "../pages/Calendar";
+import Order from "../pages/Order";
 
 const HideIfLogin = ({ children }: any) => {
   const location = useLocation();
@@ -63,6 +64,7 @@ export default function Root() {
         <PrivateRoute path="/profile" exact component={Profile} user={user} />
         <PrivateRoute path="/calendar" exact component={Calendar} user={user} />
         <PrivateRoute path="/posts" exact component={Posts} user={user} />
+        <PrivateRoute path="/order" exact component={Order} user={user} />
         <Route path="/login" exact component={Login} />
         <Redirect path="*" to="/login" />
       </Switch>
