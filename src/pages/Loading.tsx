@@ -5,7 +5,7 @@ import oc from "../oc.json";
 import ReactLoading from "react-loading";
 
 const Container = styled.main`
-  height: 100vh;
+  height: 100%;
   background-color: ${oc.indigo[7]};
 
   display: flex;
