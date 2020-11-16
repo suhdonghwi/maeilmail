@@ -4,4 +4,5 @@ export default interface Mission {
   kit: string;
   tip: string;
   participants: Record<string, string>;
+  imageUrl: string;
 }

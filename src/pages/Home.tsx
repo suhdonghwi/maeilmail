@@ -12,8 +12,9 @@ import Mission from "../interfaces/Mission";
 
 import ReactLoading from "react-loading";
 
-const Container = styled(PageContainer)`
+const Container = styled(PageContainer)<{ imageUrl: string }>`
   background-color: ${oc.indigo[7]};
+  background-image: url(${(props) => props.imageUrl});
 `;
 
 const Content = styled.div`
@@ -110,7 +111,7 @@ export default function Home({ user }: HomeProps) {
   }, [user, participate]);
 
   return (
-    <Container>
+    <Container imageUrl={mission ? mission.imageUrl : ""}>
       <RoundBox>
         <Content>
           {mission === null ? (
