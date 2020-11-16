@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import dayjs from "dayjs";
 import firebase from "firebase";
 import styled from "styled-components/macro";
 import oc from "../oc.json";
@@ -64,6 +65,12 @@ const PostImage = styled.img`
   margin-bottom: 0.5rem;
 `;
 
+const Date = styled.p`
+  margin: 0 0 0.2rem 0;
+  color: ${oc.gray[6]};
+  font-size: 0.8rem;
+`;
+
 interface PostsProps {
   user: firebase.User;
 }
@@ -72,9 +79,7 @@ export default function Posts({ user }: PostsProps) {
   const [posts, setPosts] = useState<Post[] | null>(null);
 
   async function fetch() {
-    const result = (
-      await firebase.database().ref("posts").once("value")
-    ).val();
+    const result = (await firebase.database().ref("posts").once("value")).val();
 
     if (result === null) setPosts([]);
     else setPosts(Object.values(result));
@@ -113,6 +118,7 @@ export default function Posts({ user }: PostsProps) {
           author: user.email?.split("@")[0]!,
           content: result.value[0],
           imageUrl: e.target?.result as string,
+          date: dayjs().format("YYYY-MM-DD"),
         };
         firebase.database().ref("posts").push(post);
 
@@ -138,6 +144,7 @@ export default function Posts({ user }: PostsProps) {
                   <div>
                     <PostImage src={post.imageUrl} />
                   </div>
+                  <Date>{dayjs(post.date).format("YYYY년 MM월 DD일")}</Date>
                   <div>
                     <strong>{post.author}</strong> {post.content}
                   </div>
