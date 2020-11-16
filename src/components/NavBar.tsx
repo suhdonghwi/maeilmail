@@ -14,6 +14,9 @@ import oc from "../oc.json";
 
 const Nav = styled.nav`
   width: 100%;
+  max-width: 25rem;
+  margin: 0 auto;
+
   padding: 0.7rem 1.5rem;
   box-sizing: border-box;
 `;
