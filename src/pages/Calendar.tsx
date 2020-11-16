@@ -46,7 +46,7 @@ export default function Calendar({ user }: CalendarProps) {
           .ref("users/" + user.uid)
           .once("value")
       ).val();
-      setDates(Object.values(result));
+      setDates(result ? Object.values(result) : []);
     }
 
     fetch();

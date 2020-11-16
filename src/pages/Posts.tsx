@@ -82,7 +82,11 @@ export default function Posts({ user }: PostsProps) {
     const result = (await firebase.database().ref("posts").once("value")).val();
 
     if (result === null) setPosts([]);
-    else setPosts(Object.values(result));
+    else {
+      const values: Post[] = Object.values(result);
+      values.reverse();
+      setPosts(values);
+    }
   }
 
   useEffect(() => {
@@ -116,6 +120,7 @@ export default function Posts({ user }: PostsProps) {
       reader.onload = (e) => {
         const post: Post = {
           author: user.email?.split("@")[0]!,
+          uid: user.uid,
           content: result.value[0],
           imageUrl: e.target?.result as string,
           date: dayjs().format("YYYY-MM-DD"),
